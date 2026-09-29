@@ -1,0 +1,22 @@
+patterns:
+  - name: native-select
+    recognition: "tagName=SELECT"
+    actions: ["SelectElement.SelectByText(value)"]
+    verify: "selected option text equals value"
+    status: seed
+  - name: react-combobox
+    recognition: "role=combobox; aria-expanded changes; popup role=listbox"
+    actions: ["click trigger", "wait for associated visible listbox", "click exact role=option name=value"]
+    verify: "selected value reflects value; verify saved outcome when scenario requires it"
+    exceptions: ["portal popup outside subtree", "async filtering", "duplicate option names"]
+    status: seed-requires-runtime-validation
+  - name: autocomplete
+    recognition: "combobox or input with suggestion popup"
+    actions: ["type query", "wait for relevant results", "choose exact identified suggestion"]
+    verify: "underlying selected entity and downstream saved outcome"
+    status: seed-requires-runtime-validation
+  - name: virtualized-grid
+    recognition: "limited rendered rows relative to total; scrollable viewport"
+    actions: ["identify row by stable business key", "scroll into view", "scope action within matching row"]
+    verify: "row identity and downstream outcome"
+    status: seed-requires-runtime-validation

@@ -1,0 +1,167 @@
+{
+  "schema": "ui-contract/v1",
+  "flow": "customer-profile.full-name-required",
+  "page": "CustomerProfile",
+  "route": "/",
+  "acceptance": [
+    "AC-103"
+  ],
+  "fixture": "seedCustomer",
+  "steps": [
+    {
+      "type": "wait",
+      "until": "visible",
+      "target": {
+        "testId": "profile-page",
+        "role": "main",
+        "name": ""
+      }
+    },
+    {
+      "type": "state",
+      "name": "loaded",
+      "html": "customer-profile.full-name-required/01-loaded.html",
+      "elements": [
+        {
+          "testId": "profile-page",
+          "role": "main",
+          "name": "",
+          "tag": "main",
+          "portal": false
+        },
+        {
+          "testId": "profile-full-name",
+          "role": "textbox",
+          "name": "Full name",
+          "tag": "input",
+          "portal": false,
+          "inputType": "text",
+          "value": "Aroha Smith"
+        },
+        {
+          "testId": "profile-country",
+          "role": "combobox",
+          "name": "Country",
+          "tag": "button",
+          "portal": false,
+          "text": "Australia",
+          "expanded": false
+        },
+        {
+          "testId": "profile-newsletter",
+          "role": "checkbox",
+          "name": "Subscribe to newsletter",
+          "tag": "input",
+          "portal": false,
+          "inputType": "checkbox",
+          "checked": false
+        },
+        {
+          "testId": "profile-save",
+          "role": "button",
+          "name": "Save",
+          "tag": "button",
+          "portal": false
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "type": "action",
+      "action": "clear",
+      "target": {
+        "testId": "profile-full-name",
+        "role": "textbox",
+        "name": "Full name"
+      }
+    },
+    {
+      "type": "action",
+      "action": "click",
+      "target": {
+        "testId": "profile-save",
+        "role": "button",
+        "name": "Save"
+      }
+    },
+    {
+      "type": "wait",
+      "until": "visible",
+      "target": {
+        "testId": "profile-full-name-error",
+        "role": "alert",
+        "name": ""
+      }
+    },
+    {
+      "type": "state",
+      "name": "validation-error",
+      "html": "customer-profile.full-name-required/02-validation-error.html",
+      "elements": [
+        {
+          "testId": "profile-page",
+          "role": "main",
+          "name": "",
+          "tag": "main",
+          "portal": false
+        },
+        {
+          "testId": "profile-full-name",
+          "role": "textbox",
+          "name": "Full name",
+          "tag": "input",
+          "portal": false,
+          "inputType": "text",
+          "value": "",
+          "invalid": true
+        },
+        {
+          "testId": "profile-full-name-error",
+          "role": "alert",
+          "name": "",
+          "tag": "p",
+          "portal": false,
+          "text": "Full name is required"
+        },
+        {
+          "testId": "profile-country",
+          "role": "combobox",
+          "name": "Country",
+          "tag": "button",
+          "portal": false,
+          "text": "Australia",
+          "expanded": false
+        },
+        {
+          "testId": "profile-newsletter",
+          "role": "checkbox",
+          "name": "Subscribe to newsletter",
+          "tag": "input",
+          "portal": false,
+          "inputType": "checkbox",
+          "checked": false
+        },
+        {
+          "testId": "profile-save",
+          "role": "button",
+          "name": "Save",
+          "tag": "button",
+          "portal": false
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "type": "outcome",
+      "target": {
+        "testId": "profile-full-name-error",
+        "role": "alert",
+        "name": ""
+      },
+      "expect": {
+        "text": "Full name is required",
+        "visible": true
+      }
+    }
+  ]
+}

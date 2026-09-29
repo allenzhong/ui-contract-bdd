@@ -1,0 +1,9 @@
+node_modules/
+dist/
+bin/
+obj/
+TestResults/
+web/src/**/__screenshots__/
+.DS_Store
+.vitest-attachments/
+*.feature.cs

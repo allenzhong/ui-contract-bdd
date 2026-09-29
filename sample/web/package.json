@@ -1,0 +1,40 @@
+{
+  "name": "sample-web",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "dependencies": {
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.43",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^5.2.0",
+    "@vitest/browser-playwright": "^4.1.11",
+    "css-loader": "^7.1.5",
+    "dom-accessibility-api": "^0.7.1",
+    "html-webpack-plugin": "^5.6.8",
+    "playwright": "^1.63.0",
+    "style-loader": "^4.0.0",
+    "ts-loader": "^9.6.2",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.11",
+    "vitest-browser-react": "^2.3.0",
+    "webpack": "^5.111.1",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.6"
+  },
+  "scripts": {
+    "start": "webpack serve --mode development",
+    "build": "webpack --mode production",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tools",
+    "test": "vitest run",
+    "contracts": "vitest run --project contracts",
+    "contracts:update": "vitest run --project contracts -u",
+    "locators": "tsx tools/generate-locators/main.ts",
+    "locators:check": "tsx tools/generate-locators/main.ts --check"
+  }
+}

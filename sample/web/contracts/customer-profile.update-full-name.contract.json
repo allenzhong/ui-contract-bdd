@@ -1,0 +1,241 @@
+{
+  "schema": "ui-contract/v1",
+  "flow": "customer-profile.update-full-name",
+  "page": "CustomerProfile",
+  "route": "/",
+  "acceptance": [
+    "AC-101"
+  ],
+  "fixture": "seedCustomer",
+  "steps": [
+    {
+      "type": "wait",
+      "until": "visible",
+      "target": {
+        "testId": "profile-page",
+        "role": "main",
+        "name": ""
+      }
+    },
+    {
+      "type": "state",
+      "name": "loaded",
+      "html": "customer-profile.update-full-name/01-loaded.html",
+      "elements": [
+        {
+          "testId": "profile-page",
+          "role": "main",
+          "name": "",
+          "tag": "main",
+          "portal": false
+        },
+        {
+          "testId": "profile-full-name",
+          "role": "textbox",
+          "name": "Full name",
+          "tag": "input",
+          "portal": false,
+          "inputType": "text",
+          "value": "Aroha Smith"
+        },
+        {
+          "testId": "profile-country",
+          "role": "combobox",
+          "name": "Country",
+          "tag": "button",
+          "portal": false,
+          "text": "Australia",
+          "expanded": false
+        },
+        {
+          "testId": "profile-newsletter",
+          "role": "checkbox",
+          "name": "Subscribe to newsletter",
+          "tag": "input",
+          "portal": false,
+          "inputType": "checkbox",
+          "checked": false
+        },
+        {
+          "testId": "profile-save",
+          "role": "button",
+          "name": "Save",
+          "tag": "button",
+          "portal": false
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "type": "action",
+      "action": "fill",
+      "target": {
+        "testId": "profile-full-name",
+        "role": "textbox",
+        "name": "Full name"
+      },
+      "text": "Aroha Ngata"
+    },
+    {
+      "type": "action",
+      "action": "click",
+      "target": {
+        "testId": "profile-save",
+        "role": "button",
+        "name": "Save"
+      }
+    },
+    {
+      "type": "wait",
+      "until": "visible",
+      "target": {
+        "testId": "toast",
+        "role": "status",
+        "name": ""
+      }
+    },
+    {
+      "type": "state",
+      "name": "saved",
+      "html": "customer-profile.update-full-name/02-saved.html",
+      "elements": [
+        {
+          "testId": "profile-page",
+          "role": "main",
+          "name": "",
+          "tag": "main",
+          "portal": false
+        },
+        {
+          "testId": "profile-full-name",
+          "role": "textbox",
+          "name": "Full name",
+          "tag": "input",
+          "portal": false,
+          "inputType": "text",
+          "value": "Aroha Ngata"
+        },
+        {
+          "testId": "profile-country",
+          "role": "combobox",
+          "name": "Country",
+          "tag": "button",
+          "portal": false,
+          "text": "Australia",
+          "expanded": false
+        },
+        {
+          "testId": "profile-newsletter",
+          "role": "checkbox",
+          "name": "Subscribe to newsletter",
+          "tag": "input",
+          "portal": false,
+          "inputType": "checkbox",
+          "checked": false
+        },
+        {
+          "testId": "profile-save",
+          "role": "button",
+          "name": "Save",
+          "tag": "button",
+          "portal": false
+        },
+        {
+          "testId": "toast",
+          "role": "status",
+          "name": "",
+          "tag": "div",
+          "portal": false,
+          "text": "Profile saved"
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "type": "outcome",
+      "target": {
+        "testId": "toast",
+        "role": "status",
+        "name": ""
+      },
+      "expect": {
+        "text": "Profile saved",
+        "visible": true
+      }
+    },
+    {
+      "type": "action",
+      "action": "reload"
+    },
+    {
+      "type": "wait",
+      "until": "visible",
+      "target": {
+        "testId": "profile-page",
+        "role": "main",
+        "name": ""
+      }
+    },
+    {
+      "type": "state",
+      "name": "reloaded",
+      "html": "customer-profile.update-full-name/03-reloaded.html",
+      "elements": [
+        {
+          "testId": "profile-page",
+          "role": "main",
+          "name": "",
+          "tag": "main",
+          "portal": false
+        },
+        {
+          "testId": "profile-full-name",
+          "role": "textbox",
+          "name": "Full name",
+          "tag": "input",
+          "portal": false,
+          "inputType": "text",
+          "value": "Aroha Ngata"
+        },
+        {
+          "testId": "profile-country",
+          "role": "combobox",
+          "name": "Country",
+          "tag": "button",
+          "portal": false,
+          "text": "Australia",
+          "expanded": false
+        },
+        {
+          "testId": "profile-newsletter",
+          "role": "checkbox",
+          "name": "Subscribe to newsletter",
+          "tag": "input",
+          "portal": false,
+          "inputType": "checkbox",
+          "checked": false
+        },
+        {
+          "testId": "profile-save",
+          "role": "button",
+          "name": "Save",
+          "tag": "button",
+          "portal": false
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "type": "outcome",
+      "target": {
+        "testId": "profile-full-name",
+        "role": "textbox",
+        "name": "Full name"
+      },
+      "expect": {
+        "value": "Aroha Ngata",
+        "visible": true
+      }
+    }
+  ]
+}

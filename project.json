@@ -1,0 +1,8 @@
+{
+  "test_repo": "../legacy-tests",
+  "react_repo": "../react-app",
+  "run_command": ["dotnet", "test", "{test_repo}", "--filter", "{filter}", "--logger", "trx;LogFileName=results.trx"],
+  "output_dir": ".ai/runs",
+  "protected_globs": ["**/*.feature"],
+  "test_id_attributes": ["data-testid", "data-test-id", "data-dataid"]
+}

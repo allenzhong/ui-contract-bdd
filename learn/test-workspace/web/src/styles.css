@@ -1,0 +1,9 @@
+body { font-family: system-ui, sans-serif; margin: 2rem; color: #1f2328; }
+.field { display: flex; flex-direction: column; gap: 0.25rem; margin-bottom: 1rem; max-width: 20rem; }
+.label { font-weight: 600; }
+input:not([type='checkbox']), .combobox { padding: 0.4rem 0.5rem; font: inherit; text-align: left; }
+.listbox { position: absolute; margin: 0; padding: 0; list-style: none; background: #fff; border: 1px solid #8c959f; box-shadow: 0 4px 12px rgb(0 0 0 / 15%); }
+.listbox li { padding: 0.4rem 0.5rem; cursor: pointer; }
+.listbox li:hover, .listbox li[aria-selected='true'] { background: #ddf4ff; }
+.error { color: #cf222e; margin: 0; }
+.toast { margin-top: 1rem; padding: 0.5rem 0.75rem; background: #dafbe1; border: 1px solid #4ac26b; display: inline-block; }
