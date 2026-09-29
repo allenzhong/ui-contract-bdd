@@ -54,7 +54,7 @@ dotnet test --filter Category=AC-102                   #    one acceptance crite
 | Developer | Builds component + flow test, runs `npm run contracts` | `web/contracts/*` in the PR |
 | Tester | `npm run locators` (in `web/`) | `tests/Generated/*` |
 | Tester + AI | "use bind-steps for @AC-nnn" in Claude Code | `tests/Pages`, `tests/Steps` |
-| CI | `npm run locators:check`, build, guard, `dotnet test` | pass/fail + failure evidence |
+| CI | `npm run locators:check`, build, `dotnet test` (an AI-safety guard is planned, see the article's gap 15) | pass/fail + failure evidence |
 
 ## What's been verified
 

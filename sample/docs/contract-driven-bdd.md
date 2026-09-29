@@ -169,7 +169,7 @@ Status: ✅ closed in the sample · 🟡 partly addressed · 🔴 open, needs a 
 | 12 | **Two repositories** | The sample reads `../web/contracts`. Separate repos need a hand-off. | 🔴 Publish contracts, together with the generator, as a versioned artifact (npm package or CI artifact) and pin the version in the tests repo. `schema: ui-contract/v1` is already there for this. |
 | 13 | **Who goes first** | If the feature is written after the UI, it drifts toward UI wording. If long before, contracts don't exist yet. | 🟡 Process: agree the AC IDs and step vocabulary first (§8). The tester writes scenarios and the developer writes flows in parallel. Binding happens last. |
 | 14 | **Step vocabulary and reuse** | "I save my profile" vs "I click Save" leads to duplicate bindings. | 🔴 Keep a small glossary of domain verbs. The skill already prefers extending existing page methods. |
-| 15 | **AI patch safety** | An agent can "fix" a red test by weakening it. | 🟡 Skill rules. Reuse `tools/migrate.py guard` from the draft kit in CI (feature files unchanged, no Sleep/Ignore, no removed asserts). Humans review bindings. |
+| 15 | **AI patch safety** | An agent can "fix" a red test by weakening it. | 🟡 Skill rules and human review of bindings. A CI guard (feature files unchanged, no Sleep/Ignore, no removed asserts) is **not built yet**; see §9. |
 | 16 | **Non-UI outcomes** | Emails, audit logs and DB state aren't in any snapshot. | 🔴 Out of scope for UI contracts. Bind to API or DB helpers explicitly. |
 | 17 | **Visual and layout regressions** | Contracts strip styles on purpose. | 🔴 Add screenshot comparison separately if needed (Vitest `toMatchScreenshot`). |
 | 18 | **Sensitive data in HTML snapshots** | Contracts get committed and shared. | 🟡 Use synthetic fixtures only. Never record flows against real accounts. |
@@ -194,18 +194,14 @@ flowchart LR
   B -- yes --> C["web: npm run locators:check"]
   C -- stale / AC without contract --> C1["fail"]
   C -- ok --> D["dotnet build<br/>(renamed testids → compile errors)"]
-  D --> E["guard: features unchanged,<br/>no Sleep/Ignore/removed asserts"]
+  D --> E["guard (not built yet): features unchanged,<br/>no Sleep/Ignore/removed asserts"]
   E --> F["start app → dotnet test"]
   F --> G["artifacts: dom.html + screenshot<br/>per failed scenario"]
 ```
 
-## 10. How this relates to the migration draft
-
-The draft kit (`../docs`, `tools/migrate.py`) is about moving **existing** Selenium tests onto a rewritten UI by exploring the running app. This approach is how you **avoid needing that exploration next time**: the developer ships the interaction evidence together with the component. The two meet in the middle. For a legacy scenario that is failing, asking the developer for a flow test for that AC produces a contract, and the same `bind-steps` skill can then re-bind the old steps against it.
-
-## 11. Suggested next steps
+## 10. Suggested next steps
 
 1. Run the sample (`sample/run-e2e.sh`) and walk through one AC together, developer and tester.
 2. Pick one real page with a non-trivial control (autocomplete, date picker, or a virtualised grid). Add a flow and see which gaps from §7 bite first.
 3. Decide on gap 12 (how contracts move between repos) and gap 6 (backend seeding) before scaling.
-4. Wire §9 into CI. Add `migrate.py guard` for the AI-safety checks.
+4. Wire §9 into CI, and write the AI-safety guard it needs (gap 15).
